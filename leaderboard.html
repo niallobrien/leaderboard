@@ -5,6 +5,7 @@
 <h1>Leaderboard</h1>
 
 {{> leaderboard }}
+{{> addPlayerForm }}
 
 </body>
 
@@ -15,9 +16,18 @@
         {{/each}}
         <li>
             <input type="button" id="increment" value="Give 5 points">
+            <input type="button" id="decrement" value="Take 5 points">
+            <input type="button" id="remove" value="Remove Player">
         </li>
         {{#if showSelectedPlayer}}
             <li>Selected player: {{showSelectedPlayer.name}}</li>
         {{/if}}
     </ul>
+</template>
+
+<template name="addPlayerForm">
+    <form>
+        <input type="text" id="playerName">
+        <input type="submit" value="Add Player">
+    </form>
 </template>

@@ -33,6 +33,30 @@ if (Meteor.isClient) {
         'click #increment': function() {
             var selectedPlayer = Session.get('selectedPlayer');
             PlayersList.update( {_id: selectedPlayer}, {$inc: {score: 5}} );
+        },
+        'click #decrement': function() {
+            var selectedPlayer = Session.get('selectedPlayer');
+            PlayersList.update( {_id: selectedPlayer}, {$inc: {score: -5}} );
+        },
+        'click #remove': function() {
+            var selectedPlayer = Session.get('selectedPlayer');
+            PlayersList.remove(selectedPlayer);
+        }
+    });
+
+    Template.addPlayerForm.events({
+        'submit form': function(e, template) {
+            e.preventDefault();
+            var playerNameVar = template.find('#playerName').value;
+            if (playerNameVar === '') {
+                return;
+            }
+            PlayersList.insert({
+                name: playerNameVar,
+                score: 0
+            });
+            // rest form
+            $('#playerName').val('');
         }
     });
 
